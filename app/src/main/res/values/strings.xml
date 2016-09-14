@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">HotelReservation</string>
+    <string-array name="tipe_kamar_arr">
+        <item>King Size</item>
+        <item>Queen Size</item>
+        <item>Club</item>
+        <item>Family</item>
+        <item>Deluxe</item>
+        <item>Double</item>
+        <item>Single</item>
+        <item>Standard</item>
+    </string-array>
 </resources>
