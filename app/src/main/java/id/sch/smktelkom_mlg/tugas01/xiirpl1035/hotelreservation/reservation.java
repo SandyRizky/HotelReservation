@@ -7,6 +7,7 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -16,7 +17,8 @@ public class reservation extends AppCompatActivity {
     TextView hasil;
     Spinner tipeKamar;
     EditText nama;
-    CheckBox cbBF, cbSH;
+    CheckBox cbBF, cbSH, cbLD;
+    ScrollView sview;
     @Override
 
 
@@ -27,11 +29,13 @@ public class reservation extends AppCompatActivity {
 
         cbBF = (CheckBox) findViewById(R.id.checkBoxBF);
         cbSH = (CheckBox) findViewById(R.id.checkBoxSH);
+        cbLD = (CheckBox) findViewById(R.id.checkBoxLD);
         tipeKamar = (Spinner) findViewById(R.id.spKamar);
         hasil = (TextView) findViewById(R.id.tvHasil);
         rbMR = (RadioButton) findViewById(R.id.radioButtonMR);
         rbMRS = (RadioButton) findViewById(R.id.radioButtonMRS);
         nama = (EditText) findViewById(R.id.editTextName);
+        sview = (ScrollView) findViewById(R.id.scrview);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
                 this, R.array.tipe_kamar_arr, android.R.layout.simple_spinner_item);
@@ -44,6 +48,7 @@ public class reservation extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 doClick();
+                hasil.requestFocus();
             }
 
             private void doClick() {
@@ -60,15 +65,27 @@ public class reservation extends AppCompatActivity {
                     hslcb = cbBF.getText().toString();
                 } else if (cbSH.isChecked()) {
                     hslcb = cbSH.getText().toString();
+                } else if (cbLD.isChecked()) {
+                    hslcb = cbLD.getText().toString();
                 } else {
-                    hslcb = "Tanpa Tambahan";
+                    hslcb = "-";
                 }
 
                 if (cbBF.isChecked() & cbSH.isChecked()) {
                     hslcb = cbBF.getText() + " & " + cbSH.getText();
                 }
+                if (cbBF.isChecked() & cbLD.isChecked()) {
+                    hslcb = cbBF.getText() + " & " + cbLD.getText();
+                }
+                if (cbSH.isChecked() & cbLD.isChecked()) {
+                    hslcb = cbSH.getText() + " & " + cbLD.getText();
+                }
+                if (cbBF.isChecked() & cbSH.isChecked() & cbLD.isChecked()) {
+                    hslcb = "Complete";
+                }
 
-                hasil.setText("PROFIL PEMESAN :\n\n Nama : " + hasil_rb + ". " + nama.getText() + "\n Tipe Kamar : " + tipeKamar.getSelectedItem() + "\n Tambahan Services : " + hslcb);
+                hasil.setText("PROFIL PEMESAN :\n\n Nama : " + hasil_rb + ". " + nama.getText() + "\n Tipe Kamar : " + tipeKamar.getSelectedItem() + "\n Tambahan Services : " + hslcb + "\n\n Terima Kasih. \n");
+
             }
         });
     }
